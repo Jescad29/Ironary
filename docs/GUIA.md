@@ -122,13 +122,32 @@ de lo **realmente ejecutado** (qué registraste cada día), y para no duplicar d
 - `Rutinas` — nombres de rutina (Pull, Push, Pierna...).
 - `RutinaEjercicios` — tabla intermedia (muchos-a-muchos entre rutinas y ejercicios).
 - `AsignacionDias` — qué rutina corresponde a cada día de la semana.
-- `SesionesEntrenamiento` — un registro por cada vez que entrenas (fecha, hora inicio/fin).
+- `SesionesEntrenamiento` — un registro por cada vez que entrenas (fecha, hora
+  inicio/fin, y una nota libre opcional sobre cómo te sentiste).
 - `SeriesRegistradas` — el historial real, serie por serie (peso, repeticiones).
+
+**Decisión de diseño:** los PRs (récords personales), la "sugerencia basada en tu
+última sesión" y las gráficas de progreso **no se guardan como datos aparte** — se
+calculan con consultas SQL sobre `SeriesRegistradas` cada vez que se piden. Guardar
+datos derivados por separado del dato fuente es una fuente común de inconsistencias
+(si corriges o borras una serie, un PR "guardado" quedaría desactualizado).
 
 Detalles de tipos de datos y buenas prácticas de SQL Server se documentarán en
 `docs/` una vez creado el script de creación de tablas.
 
-## 8. Próximos pasos
+## 8. Alcance del MVP (definido 2026-08-01)
+
+- CRUD completo de ejercicios, rutinas y asignación por día de la semana.
+- Registro de sesiones con notas y series (peso/reps) por ejercicio.
+- Detección automática de PRs y sugerencia de referencia basada en la última sesión.
+- Gráficas de progreso por ejercicio a lo largo del tiempo.
+- Frontend **mobile-first**: se diseñará pensando primero en uso desde el celular
+  (capturando datos parado en el gym), y se adaptará a escritorio después.
+
+Fuera del MVP por ahora (posible v2): multiusuario/login, seguimiento de peso
+corporal/medidas, timer de descanso entre series, exportación de datos.
+
+## 9. Próximos pasos
 
 1. Escribir el script `CREATE TABLE` para las 6 tablas del modelo de datos.
 2. Instalar `pyodbc` y conectar Flask con SQL Server (`LTIGSA25035\SQLEXPRESS`,

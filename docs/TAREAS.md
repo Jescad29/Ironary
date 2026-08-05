@@ -31,9 +31,9 @@ Ver `docs/GUIA.md` para el detalle de arquitectura y decisiones de diseño.
 - [x] Crear base de datos `Ironary` en SQL Server (`backend/database/001_create_database.sql`)
 - [x] Escribir script `CREATE TABLE` para las 6 tablas (`backend/database/002_create_tables.sql`)
 - [x] Ejecutar script en `LTIGSA25035\SQLEXPRESS`
-- [ ] Instalar `pyodbc`
-- [ ] Probar conexión Flask → SQL Server
-- [ ] Guardar cadena de conexión en `.env` (no hardcodeada en el código)
+- [x] Instalar `pyodbc`
+- [x] Probar conexión Flask → SQL Server (`/api/db-test`)
+- [x] Guardar cadena de conexión en `.env` (no hardcodeada en el código)
 
 ## Fase 3 — API REST (CRUD)
 

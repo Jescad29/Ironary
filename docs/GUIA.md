@@ -107,7 +107,7 @@ API vía peticiones HTTP — no conoce ni le importa cómo está implementado el
 | 1 | Backend mínimo con rutas de ejemplo (texto y JSON) | ✅ Completa |
 | — | Reorganización a `backend/` + Application Factory + Blueprints | ✅ Completa |
 | — | Repositorio en GitHub, README, licencia (Apache 2.0) | ✅ Completa |
-| 2 | Diseño del modelo de datos y conexión a SQL Server | 🔄 En progreso |
+| 2 | Diseño del modelo de datos y conexión a SQL Server | ✅ Completa |
 | 3 | API REST completa (CRUD) sobre el modelo de datos | ⏳ Pendiente |
 | 4 | Frontend básico con HTML/CSS/JS consumiendo la API | ⏳ Pendiente |
 | 5 | Migración del frontend a React | ⏳ Pendiente |
@@ -136,6 +136,22 @@ documentación y comentarios en español.
 restricciones `CHECK`/`UNIQUE` correspondientes). Los scripts SQL se numeran en
 orden (`001_`, `002_`...) y se guardan en el repositorio para poder recrear la
 base de datos completa desde cero en cualquier máquina, igual que con el código.
+
+### Conexión Flask ↔ SQL Server
+
+- Librería: `pyodbc`, con `ODBC Driver 18 for SQL Server` y Windows Authentication
+  (`Trusted_Connection=yes`).
+- La cadena de conexión **no está hardcodeada**: vive en `backend/.env` (ignorado
+  por git) y se carga con `python-dotenv`. `backend/.env.example` documenta qué
+  variables se necesitan (`DB_SERVER`, `DB_DATABASE`, `DB_DRIVER`) sin exponer
+  valores reales.
+- Función de conexión: `backend/app/db/connection.py` → `get_connection()`.
+- `Encrypt=yes` + `TrustServerCertificate=yes` porque el Driver 18 exige conexión
+  encriptada por defecto; en desarrollo local se confía en el certificado del
+  servidor sin validarlo contra una autoridad certificadora (esto **no** es
+  apropiado para producción, ahí se requiere un certificado válido).
+- Ruta de prueba `/api/db-test` (`backend/app/routes/db_test.py`) confirma la
+  conexión listando las tablas de la base de datos.
 
 **Decisión de diseño:** los PRs (récords personales), la "sugerencia basada en tu
 última sesión" y las gráficas de progreso **no se guardan como datos aparte** — se

@@ -29,8 +29,8 @@ Ver `docs/GUIA.md` para el detalle de arquitectura y decisiones de diseño.
 
 - [x] Diseñar modelo de datos (6 tablas)
 - [x] Crear base de datos `Ironary` en SQL Server (`backend/database/001_create_database.sql`)
-- [ ] Escribir script `CREATE TABLE` para las 6 tablas
-- [ ] Ejecutar script en `LTIGSA25035\SQLEXPRESS`
+- [x] Escribir script `CREATE TABLE` para las 6 tablas (`backend/database/002_create_tables.sql`)
+- [x] Ejecutar script en `LTIGSA25035\SQLEXPRESS`
 - [ ] Instalar `pyodbc`
 - [ ] Probar conexión Flask → SQL Server
 - [ ] Guardar cadena de conexión en `.env` (no hardcodeada en el código)

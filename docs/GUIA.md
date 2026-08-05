@@ -118,19 +118,24 @@ API vía peticiones HTTP — no conoce ni le importa cómo está implementado el
 Seis tablas, pensadas para separar el **plan** (qué ejercicios lleva cada rutina)
 de lo **realmente ejecutado** (qué registraste cada día), y para no duplicar datos:
 
-- `Ejercicios` — catálogo maestro de ejercicios.
-- `Rutinas` — nombres de rutina (Pull, Push, Pierna...).
-- `RutinaEjercicios` — tabla intermedia (muchos-a-muchos entre rutinas y ejercicios).
-- `AsignacionDias` — qué rutina corresponde a cada día de la semana.
-- `SesionesEntrenamiento` — un registro por cada vez que entrenas (fecha, hora
+Nombres de tablas y columnas en inglés (convención estándar de la industria);
+documentación y comentarios en español.
+
+- `Exercises` — catálogo maestro de ejercicios.
+- `Routines` — nombres de rutina (Pull, Push, Pierna...).
+- `RoutineExercises` — tabla intermedia (muchos-a-muchos entre rutinas y ejercicios).
+- `DayAssignments` — qué rutina corresponde a cada día de la semana.
+- `WorkoutSessions` — un registro por cada vez que entrenas (fecha, hora
   inicio/fin, y una nota libre opcional sobre cómo te sentiste).
-- `SeriesRegistradas` — el historial real, serie por serie (peso, repeticiones).
+- `LoggedSets` — el historial real, serie por serie (peso, repeticiones).
 
 **Avance:** la base de datos `Ironary` ya fue creada en el servidor
 `LTIGSA25035\SQLEXPRESS` mediante el script versionado
-`backend/database/001_create_database.sql`. Los scripts SQL se numeran en orden
-(`001_`, `002_`...) y se guardan en el repositorio para poder recrear la base de
-datos completa desde cero en cualquier máquina, igual que con el código.
+`backend/database/001_create_database.sql`. Las 6 tablas ya existen, creadas con
+`backend/database/002_create_tables.sql` (con sus llaves primarias, foráneas y
+restricciones `CHECK`/`UNIQUE` correspondientes). Los scripts SQL se numeran en
+orden (`001_`, `002_`...) y se guardan en el repositorio para poder recrear la
+base de datos completa desde cero en cualquier máquina, igual que con el código.
 
 **Decisión de diseño:** los PRs (récords personales), la "sugerencia basada en tu
 última sesión" y las gráficas de progreso **no se guardan como datos aparte** — se

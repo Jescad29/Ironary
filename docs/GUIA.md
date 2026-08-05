@@ -126,6 +126,12 @@ de lo **realmente ejecutado** (qué registraste cada día), y para no duplicar d
   inicio/fin, y una nota libre opcional sobre cómo te sentiste).
 - `SeriesRegistradas` — el historial real, serie por serie (peso, repeticiones).
 
+**Avance:** la base de datos `Ironary` ya fue creada en el servidor
+`LTIGSA25035\SQLEXPRESS` mediante el script versionado
+`backend/database/001_create_database.sql`. Los scripts SQL se numeran en orden
+(`001_`, `002_`...) y se guardan en el repositorio para poder recrear la base de
+datos completa desde cero en cualquier máquina, igual que con el código.
+
 **Decisión de diseño:** los PRs (récords personales), la "sugerencia basada en tu
 última sesión" y las gráficas de progreso **no se guardan como datos aparte** — se
 calculan con consultas SQL sobre `SeriesRegistradas` cada vez que se piden. Guardar
